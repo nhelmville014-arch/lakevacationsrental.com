@@ -42,7 +42,9 @@
     border-bottom: 1px solid rgba(95,149,152,0.18);
     transition: background 0.3s;
   }
-  .nav-logo img { height:48px; object-fit:contain; }
+  .nav-logo { display:flex; align-items:center; gap:0.6rem; }
+  .nav-logo img { height:44px; width:44px; object-fit:contain; border-radius:50%; }
+  .nav-logo-text { font-family:'Cormorant Garamond', serif; font-size:1.3rem; color:var(--gold-lt); font-style:italic; }
   .nav-links { display:flex; gap:2.5rem; list-style:none; }
   .nav-links a {
     text-decoration:none;
@@ -90,9 +92,12 @@
     pointer-events:none;
   }
   .hero-logo {
-    width:180px; margin-bottom:2.5rem;
+    width:280px; height:280px;
+    object-fit:contain;
+    margin-bottom:2rem;
     filter: drop-shadow(0 4px 32px rgba(95,149,152,0.4));
     animation: logoReveal 1.2s ease both;
+    display:block; margin-left:auto; margin-right:auto;
   }
   @keyframes logoReveal {
     from { opacity:0; transform:scale(0.85) translateY(20px); }
@@ -219,35 +224,31 @@
 
   /* ─── GALLERY ─── */
   #gallery { background:#081f2a; padding-bottom:4rem; }
-  .gallery-mosaic {
-    display:grid; grid-template-columns:repeat(12,1fr);
-    grid-template-rows:repeat(3, 180px); gap:6px; margin-top:3.5rem;
+  .gallery-category { margin-top:3.5rem; }
+  .gallery-cat-label {
+    font-size:0.78rem; font-weight:600; letter-spacing:0.15em;
+    text-transform:uppercase; color:var(--gold-lt);
+    margin-bottom:1.2rem; padding-bottom:0.6rem;
+    border-bottom:1px solid rgba(95,149,152,0.2);
   }
-  .gimg { border-radius:4px; overflow:hidden; position:relative; cursor:pointer; }
-  .gimg:nth-child(1) { grid-column:1/5; grid-row:1/3; }
-  .gimg:nth-child(2) { grid-column:5/9; grid-row:1/2; }
-  .gimg:nth-child(3) { grid-column:9/13; grid-row:1/2; }
-  .gimg:nth-child(4) { grid-column:5/8; grid-row:2/3; }
-  .gimg:nth-child(5) { grid-column:8/13; grid-row:2/3; }
-  .gimg:nth-child(6) { grid-column:1/5; grid-row:3/4; }
-  .gimg:nth-child(7) { grid-column:5/9; grid-row:3/4; }
-  .gimg:nth-child(8) { grid-column:9/13; grid-row:3/4; }
-  .gimg-inner {
-    width:100%; height:100%; display:flex; flex-direction:column;
-    align-items:center; justify-content:center; gap:0.5rem;
-    font-size:0.72rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase;
-    color:rgba(255,255,255,0.7); transition:transform 0.4s ease;
+  .gallery-grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+  .gallery-grid-2 { display:grid; grid-template-columns:repeat(2,1fr); gap:8px; }
+  .photo-card {
+    border-radius:6px; overflow:hidden;
+    aspect-ratio:4/3; cursor:pointer;
+    background:rgba(29,84,109,0.3);
   }
-  .gimg:hover .gimg-inner { transform:scale(1.04); }
-  .gimg-inner span { font-size:2rem; }
-  .g1 { background:linear-gradient(145deg,#0e3d52,#1a6070); }
-  .g2 { background:linear-gradient(145deg,#143342,#1d546d); }
-  .g3 { background:linear-gradient(145deg,#2a5a3a,#3d7a52); }
-  .g4 { background:linear-gradient(145deg,#1d3d2a,#2d5a40); }
-  .g5 { background:linear-gradient(145deg,#0a2d3e,#1a4a5e); }
-  .g6 { background:linear-gradient(145deg,#3a4a2a,#526040); }
-  .g7 { background:linear-gradient(145deg,#1a4a5e,#2d6a7e); }
-  .g8 { background:linear-gradient(145deg,#2a3a2a,#3a5040); }
+  .photo-card img {
+    width:100%; height:100%; object-fit:cover;
+    transition:transform 0.4s ease; display:block;
+  }
+  .photo-card:hover img { transform:scale(1.05); }
+  @media(max-width:860px){
+    .gallery-grid-3, .gallery-grid-2 { grid-template-columns:repeat(2,1fr); }
+  }
+  @media(max-width:480px){
+    .gallery-grid-3, .gallery-grid-2 { grid-template-columns:1fr; }
+  }
 
   /* ─── AMENITIES ─── */
   #amenities { background:var(--navy); }
@@ -299,32 +300,21 @@
   .booking-card {
     background:rgba(6,30,41,0.6); border:1px solid rgba(255,255,255,0.12);
     border-radius:10px; padding:3rem; max-width:720px; margin:3rem auto 0;
-    backdrop-filter:blur(8px);
+    backdrop-filter:blur(8px); text-align:center;
   }
   .pricing-ribbon {
     background:var(--gold); color:var(--navy); font-size:0.78rem; font-weight:700;
     letter-spacing:0.1em; text-transform:uppercase; padding:0.7rem 1.5rem;
     border-radius:4px; margin-bottom:2rem; display:inline-block;
   }
-  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem; }
-  .fg { display:flex; flex-direction:column; gap:0.4rem; }
-  .fg label { font-size:0.7rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.5); }
-  .fg input, .fg select, .fg textarea {
-    background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.15);
-    border-radius:4px; padding:0.8rem 1rem; color:white;
-    font-family:'Jost', sans-serif; font-size:0.92rem; font-weight:300;
-    outline:none; transition:border-color 0.2s;
+  .calendly-placeholder {
+    background:rgba(255,255,255,0.05);
+    border:1px dashed rgba(255,255,255,0.2);
+    border-radius:8px; padding:3rem 2rem;
+    color:rgba(255,255,255,0.5);
+    font-size:0.9rem; font-weight:300;
+    margin-top:1rem;
   }
-  .fg input:focus, .fg select:focus, .fg textarea:focus { border-color:var(--gold); }
-  .fg input::placeholder, .fg textarea::placeholder { color:rgba(255,255,255,0.3); }
-  .fg select option { background:var(--navy); }
-  .fg textarea { resize:vertical; min-height:80px; }
-  .btn-book {
-    width:100%; background:var(--gold); color:var(--navy); border:none; padding:1.1rem;
-    border-radius:4px; font-family:'Jost', sans-serif; font-size:0.85rem; font-weight:700;
-    letter-spacing:0.12em; text-transform:uppercase; cursor:pointer; transition:all 0.2s; margin-top:0.5rem;
-  }
-  .btn-book:hover { background:var(--gold-lt); transform:translateY(-2px); }
 
   /* ─── RULES ─── */
   #rules { background:var(--navy); }
@@ -364,10 +354,27 @@
   .c-detail { display:flex; gap:1rem; align-items:flex-start; font-size:0.9rem; color:rgba(255,255,255,0.65); margin-bottom:1rem; line-height:1.5; font-weight:300; }
   .c-detail .ico { font-size:1.1rem; margin-top:1px; flex-shrink:0; }
   .contact-form { background:rgba(6,30,41,0.4); border:1px solid rgba(255,255,255,0.12); border-radius:8px; padding:2.5rem; }
+  .btn-book {
+    width:100%; background:var(--gold); color:var(--navy); border:none; padding:1.1rem;
+    border-radius:4px; font-family:'Jost', sans-serif; font-size:0.85rem; font-weight:700;
+    letter-spacing:0.12em; text-transform:uppercase; cursor:pointer; transition:all 0.2s; margin-top:0.5rem;
+  }
+  .btn-book:hover { background:var(--gold-lt); transform:translateY(-2px); }
+  .fg { display:flex; flex-direction:column; gap:0.4rem; margin-bottom:1rem; }
+  .fg label { font-size:0.7rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.5); }
+  .fg input, .fg textarea {
+    background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.15);
+    border-radius:4px; padding:0.8rem 1rem; color:white;
+    font-family:'Jost', sans-serif; font-size:0.92rem; font-weight:300;
+    outline:none; transition:border-color 0.2s;
+  }
+  .fg input:focus, .fg textarea:focus { border-color:var(--gold); }
+  .fg input::placeholder, .fg textarea::placeholder { color:rgba(255,255,255,0.3); }
+  .fg textarea { resize:vertical; min-height:80px; }
 
   /* ─── FOOTER ─── */
   footer { background:var(--navy); border-top:1px solid rgba(95,149,152,0.15); text-align:center; padding:3rem 2rem; }
-  footer img { height:52px; margin-bottom:1.2rem; opacity:0.85; }
+  footer img { height:80px; width:80px; object-fit:contain; margin-bottom:1.2rem; opacity:0.9; border-radius:50%; }
   footer p { font-size:0.8rem; color:rgba(232,238,238,0.35); line-height:1.8; font-weight:300; }
   footer a { color:var(--sage); text-decoration:none; }
 
@@ -379,9 +386,8 @@
     .pillars-grid { grid-template-columns:1fr; }
     .pillar { border-right:none; }
     .property-grid, .amenities-layout, .contact-layout { grid-template-columns:1fr; }
-    .gallery-mosaic { grid-template-columns:repeat(2,1fr); grid-template-rows:auto; }
-    .gimg { grid-column:auto !important; grid-row:auto !important; height:180px; }
     .form-row { grid-template-columns:1fr; }
+    .hero-logo { width:200px; height:200px; }
   }
 </style>
 </head>
@@ -389,8 +395,8 @@
 
 <nav id="main-nav">
   <div class="nav-logo">
-    <img src="CASAMIRA_TRANSPARENT_LOGO.png" alt="CASAMIRA" onerror="this.style.display='none';document.querySelector('.nav-text').style.display='block'">
-    <span class="nav-text" style="display:none;font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--gold-lt);font-style:italic;">CASAMIRA</span>
+    <img src="CASAMIRA_TRANSPARENT_LOGO.png" alt="CASAMIRA">
+    <span class="nav-logo-text">CASAMIRA</span>
   </div>
   <ul class="nav-links">
     <li><a href="#wellness">Wellness</a></li>
@@ -410,7 +416,7 @@
     <div class="wave wave-2"></div>
     <div class="wave wave-3"></div>
   </div>
-  <img class="hero-logo" src="CASAMIRA_TRANSPARENT_LOGO.png" alt="CASAMIRA" onerror="this.style.display='none'">
+  <img class="hero-logo" src="CASAMIRA_TRANSPARENT_LOGO.png" alt="CASAMIRA">
   <div class="hero-eyebrow">Bashan Lake · East Haddam, Connecticut</div>
   <h1>Rest<br><em>Restore</em><br>Return</h1>
   <p class="hero-tagline">Experience the calm of Nature by Water</p>
@@ -439,36 +445,12 @@
     <h2 class="section-title">Wellness by the Water</h2>
     <p class="section-sub">We believe the lake is the best therapist. CASAMIRA is designed around the restorative power of nature — slow mornings, gentle movement, family time and genuine rest.</p>
     <div class="pillars-grid">
-      <div class="pillar">
-        <div class="pillar-icon">🌅</div>
-        <h3>Morning Stillness</h3>
-        <p>Wake to the sound of water, coffee in hand, lake view through the kitchen windows. No agenda. Bashan Lake rewards those who simply sit and listen.</p>
-      </div>
-      <div class="pillar">
-        <div class="pillar-icon">🛶</div>
-        <h3>Mindful Movement</h3>
-        <p>Kayak at your own pace. Paddleboard with a sunrise behind you. Wade in clean, clear water. Movement out here feels nothing like the gym — it feels like play.</p>
-      </div>
-      <div class="pillar">
-        <div class="pillar-icon">🌿</div>
-        <h3>Nature Immersion</h3>
-        <p>Hawks overhead. Deer &amp; Red Fox at dusk. Stars without light pollution. The property's many secluded acres invite you to disconnect from screens and reconnect with what matters.</p>
-      </div>
-      <div class="pillar">
-        <div class="pillar-icon">🍽️</div>
-        <h3>Nourish Together</h3>
-        <p>Gather around a lakeside or lawn grill. Cook real meals in a fully stocked kitchen. Eat with the people you love at picnic tables overlooking the water. Simple, healing joy.</p>
-      </div>
-      <div class="pillar">
-        <div class="pillar-icon">😴</div>
-        <h3>Deep Rest</h3>
-        <p>Fresh air, clean water, and quiet nights make sleep different here. Newly renovated bedrooms, comfortable beds, and no car traffic noise — just the sounds of nature and fun at the lake.</p>
-      </div>
-      <div class="pillar">
-        <div class="pillar-icon">👨‍👩‍👧‍👦</div>
-        <h3>Family Healing</h3>
-        <p>Unplug together. Swim together. Paddle board together. Hang out at the beach together. Some of the best family moments happen when there's nowhere to be and a whole lake in front of you.</p>
-      </div>
+      <div class="pillar"><div class="pillar-icon">🌅</div><h3>Morning Stillness</h3><p>Wake to the sound of water, coffee in hand, lake view through the kitchen windows. No agenda. Bashan Lake rewards those who simply sit and listen.</p></div>
+      <div class="pillar"><div class="pillar-icon">🛶</div><h3>Mindful Movement</h3><p>Kayak at your own pace. Paddleboard with a sunrise behind you. Wade in clean, clear water. Movement out here feels nothing like the gym — it feels like play.</p></div>
+      <div class="pillar"><div class="pillar-icon">🌿</div><h3>Nature Immersion</h3><p>Hawks overhead. Deer &amp; Red Fox at dusk. Stars without light pollution. The property's many secluded acres invite you to disconnect from screens and reconnect with what matters.</p></div>
+      <div class="pillar"><div class="pillar-icon">🍽️</div><h3>Nourish Together</h3><p>Gather around a lakeside or lawn grill. Cook real meals in a fully stocked kitchen. Eat with the people you love at picnic tables overlooking the water. Simple, healing joy.</p></div>
+      <div class="pillar"><div class="pillar-icon">😴</div><h3>Deep Rest</h3><p>Fresh air, clean water, and quiet nights make sleep different here. Newly renovated bedrooms, comfortable beds, and no car traffic noise — just the sounds of nature and fun at the lake.</p></div>
+      <div class="pillar"><div class="pillar-icon">👨‍👩‍👧‍👦</div><h3>Family Healing</h3><p>Unplug together. Swim together. Paddle board together. Hang out at the beach together. Some of the best family moments happen when there's nowhere to be and a whole lake in front of you.</p></div>
     </div>
   </div>
 </section>
@@ -534,16 +516,57 @@
   <div class="container">
     <div class="section-label">Gallery</div>
     <h2 class="section-title">See <em>CASAMIRA</em></h2>
-    <p class="section-sub">Photography coming Summer 2026. A preview of what awaits you.</p>
-    <div class="gallery-mosaic">
-      <div class="gimg"><div class="gimg-inner g1"><span>🌊</span>The Lake at Dawn</div></div>
-      <div class="gimg"><div class="gimg-inner g2"><span>🏡</span>The Home</div></div>
-      <div class="gimg"><div class="gimg-inner g3"><span>🌲</span>The Property</div></div>
-      <div class="gimg"><div class="gimg-inner g4"><span>🍳</span>Kitchen View</div></div>
-      <div class="gimg"><div class="gimg-inner g5"><span>🛶</span>Kayaking</div></div>
-      <div class="gimg"><div class="gimg-inner g6"><span>🛏</span>Bedroom 1</div></div>
-      <div class="gimg"><div class="gimg-inner g7"><span>🔥</span>Lakeside Grill</div></div>
-      <div class="gimg"><div class="gimg-inner g8"><span>🏖️</span>The Sandbar</div></div>
+    <p class="section-sub">A glimpse into your lakeside retreat — every corner designed for rest and connection.</p>
+
+    <div class="gallery-category">
+      <div class="gallery-cat-label">🌊 The Lake</div>
+      <div class="gallery-grid-3">
+        <div class="photo-card"><img src="lake-1.jpg" alt="The Lake"></div>
+        <div class="photo-card"><img src="lake-2.jpg" alt="The Lake"></div>
+        <div class="photo-card"><img src="lake-3.jpg" alt="The Lake"></div>
+      </div>
+    </div>
+
+    <div class="gallery-category">
+      <div class="gallery-cat-label">🛋 Living Spaces</div>
+      <div class="gallery-grid-2">
+        <div class="photo-card"><img src="living-1.jpg" alt="Living Room"></div>
+        <div class="photo-card"><img src="living-2.jpg" alt="Living Room"></div>
+      </div>
+    </div>
+
+    <div class="gallery-category">
+      <div class="gallery-cat-label">🍳 Kitchen</div>
+      <div class="gallery-grid-3">
+        <div class="photo-card"><img src="kitchen-1.jpg" alt="Kitchen"></div>
+        <div class="photo-card"><img src="kitchen-2.jpg" alt="Kitchen"></div>
+        <div class="photo-card"><img src="kitchen-3.jpg" alt="Kitchen"></div>
+      </div>
+    </div>
+
+    <div class="gallery-category">
+      <div class="gallery-cat-label">🛏 Bedrooms</div>
+      <div class="gallery-grid-3">
+        <div class="photo-card"><img src="bedroom-1.jpg" alt="Bedroom"></div>
+        <div class="photo-card"><img src="bedroom-2.jpg" alt="Bedroom"></div>
+        <div class="photo-card"><img src="bedroom-3.jpg" alt="Bedroom"></div>
+      </div>
+    </div>
+
+    <div class="gallery-category">
+      <div class="gallery-cat-label">🚿 Bathrooms</div>
+      <div class="gallery-grid-2">
+        <div class="photo-card"><img src="bathroom-1.jpg" alt="Bathroom"></div>
+        <div class="photo-card"><img src="bathroom-2.jpg" alt="Bathroom"></div>
+      </div>
+    </div>
+
+    <div class="gallery-category">
+      <div class="gallery-cat-label">🌅 Sunsets &amp; Scenery</div>
+      <div class="gallery-grid-2">
+        <div class="photo-card"><img src="sunset-1.jpg" alt="Sunset"></div>
+        <div class="photo-card"><img src="sunset-2.jpg" alt="Sunset"></div>
+      </div>
     </div>
   </div>
 </section>
@@ -597,51 +620,10 @@
     <h2 class="section-title">East Haddam <em>&amp; Beyond</em></h2>
     <p class="section-sub">Before or after your lake time each day — there's a remarkable Connecticut to explore during the day.</p>
     <div class="area-grid">
-      <div class="area-card">
-        <h3>🏪 5–15 Minutes Away</h3>
-        <ul>
-          <li>Local markets (5 min)</li>
-          <li>Grocery stores (15 min)</li>
-          <li>Goodspeed Opera House</li>
-          <li>Gillette Castle State Park</li>
-          <li>Devil's Hopyard State Park</li>
-          <li>Chapman Falls</li>
-          <li>Local restaurants</li>
-        </ul>
-      </div>
-      <div class="area-card">
-        <h3>🗺 Day Trips (under 1 hr)</h3>
-        <ul>
-          <li>Connecticut ocean beaches</li>
-          <li>Foxwoods &amp; Mohegan Sun</li>
-          <li>Mystic Aquarium</li>
-          <li>Mystic Seaport Museum</li>
-          <li>New England coastal towns</li>
-          <li>Farm-to-table dining scenes</li>
-        </ul>
-      </div>
-      <div class="area-card">
-        <h3>🎣 On Bashan Lake</h3>
-        <ul>
-          <li>Freshwater fishing (stocked)</li>
-          <li>Kayaking &amp; paddleboarding</li>
-          <li>Swimming &amp; floating</li>
-          <li>Power boating nearby</li>
-          <li>Eagle &amp; osprey watching</li>
-          <li>Sunset lakeside dinners</li>
-        </ul>
-      </div>
-      <div class="area-card">
-        <h3>🌿 Nature &amp; Wellness</h3>
-        <ul>
-          <li>Eagle, osprey, hawk sightings</li>
-          <li>Deer, fox &amp; wildlife nearby</li>
-          <li>Hiking in state forests</li>
-          <li>Star gazing (low light pollution)</li>
-          <li>Fall foliage drives</li>
-          <li>Private acreage to explore</li>
-        </ul>
-      </div>
+      <div class="area-card"><h3>🏪 5–15 Minutes Away</h3><ul><li>Local markets (5 min)</li><li>Grocery stores (15 min)</li><li>Goodspeed Opera House</li><li>Gillette Castle State Park</li><li>Devil's Hopyard State Park</li><li>Chapman Falls</li><li>Local restaurants</li></ul></div>
+      <div class="area-card"><h3>🗺 Day Trips (under 1 hr)</h3><ul><li>Connecticut ocean beaches</li><li>Foxwoods &amp; Mohegan Sun</li><li>Mystic Aquarium</li><li>Mystic Seaport Museum</li><li>New England coastal towns</li><li>Farm-to-table dining scenes</li></ul></div>
+      <div class="area-card"><h3>🎣 On Bashan Lake</h3><ul><li>Freshwater fishing (stocked)</li><li>Kayaking &amp; paddleboarding</li><li>Swimming &amp; floating</li><li>Power boating nearby</li><li>Eagle &amp; osprey watching</li><li>Sunset lakeside dinners</li></ul></div>
+      <div class="area-card"><h3>🌿 Nature &amp; Wellness</h3><ul><li>Eagle, osprey, hawk sightings</li><li>Deer, fox &amp; wildlife nearby</li><li>Hiking in state forests</li><li>Star gazing (low light pollution)</li><li>Fall foliage drives</li><li>Private acreage to explore</li></ul></div>
     </div>
   </div>
 </section>
@@ -651,39 +633,12 @@
   <div class="container">
     <div class="section-label">Reserve Your Stay</div>
     <h2 class="section-title">Now Booking <em>Summer 2026</em></h2>
-    <p class="section-sub">4–7 day stays. Weekly discounts. Maximum 8 guests. Contact us to check availability and rates.</p>
+    <p class="section-sub">4–7 day stays. Weekly discounts. Maximum 8 guests. Choose your preferred dates to check availability &amp; rates.</p>
     <div class="booking-card">
       <div class="pricing-ribbon">✦ Limited Summer 2026 Availability</div>
-      <form onsubmit="handleBook(event)">
-        <div class="form-row">
-          <div class="fg"><label>Your Name</label><input type="text" placeholder="Full name" required></div>
-          <div class="fg"><label>Email</label><input type="email" placeholder="your@email.com" required></div>
-        </div>
-        <div class="form-row">
-          <div class="fg"><label>Arrival Date</label><input type="date" required></div>
-          <div class="fg"><label>Departure Date</label><input type="date" required></div>
-        </div>
-        <div class="form-row">
-          <div class="fg">
-            <label>Guests</label>
-            <select>
-              <option>2 guests</option><option>3 guests</option><option>4 guests</option>
-              <option>5 guests</option><option>6 guests</option><option>7 guests</option><option>8 guests</option>
-            </select>
-          </div>
-          <div class="fg">
-            <label>Bringing Dogs?</label>
-            <select>
-              <option>No dogs</option><option>1 dog (under 60 lbs)</option><option>2 dogs (under 60 lbs each)</option>
-            </select>
-          </div>
-        </div>
-        <div class="fg" style="margin-bottom:1.5rem">
-          <label>Message / Questions</label>
-          <textarea placeholder="Tell us about your group, wellness goals, or any questions…"></textarea>
-        </div>
-        <button type="submit" class="btn-book">Send Inquiry →</button>
-      </form>
+      <div class="calendly-placeholder">
+        📅 Calendar coming soon — contact us at casamirallc@gmail.com to check availability
+      </div>
     </div>
   </div>
 </section>
@@ -695,59 +650,12 @@
     <h2 class="section-title">A Few Things to <em>Know</em></h2>
     <p class="section-sub">These guidelines keep CASAMIRA beautiful for every guest. Full details provided at booking.</p>
     <div class="rules-grid">
-      <div class="rule-card">
-        <h3>⏰ Check-In &amp; Out</h3>
-        <ul>
-          <li>Check-in at 3:00 PM via keypad</li>
-          <li>Lake access on check-in day from 12:00 noon</li>
-          <li>Check-out strictly 11:00 AM</li>
-          <li>Late checkout = additional night</li>
-        </ul>
-      </div>
-      <div class="rule-card">
-        <h3>👥 Occupancy</h3>
-        <ul>
-          <li>Maximum 8 guests</li>
-          <li>No parties or events</li>
-          <li>Only agreed-upon guests permitted</li>
-          <li>Extra guests: $100/person/night</li>
-        </ul>
-      </div>
-      <div class="rule-card">
-        <h3>🐕 Pets</h3>
-        <ul>
-          <li>Up to 2 dogs, under 50 lbs</li>
-          <li>$250 refundable pet deposit</li>
-          <li>Dogs must be leashed outdoors</li>
-          <li>Wildlife area: coyotes, bears, eagles can be hazardous to pets</li>
-        </ul>
-      </div>
-      <div class="rule-card">
-        <h3>🌊 On the Water</h3>
-        <ul>
-          <li>Life jackets required (CT law)</li>
-          <li>Water shoes recommended</li>
-          <li>No nude swimming</li>
-          <li>Owners motorized watercraft access prohibited</li>
-        </ul>
-      </div>
-      <div class="rule-card">
-        <h3>🚭 Smoking</h3>
-        <ul>
-          <li>No smoking or vaping indoors</li>
-          <li>Proper disposal required</li>
-          <li>Guests responsible for damage</li>
-        </ul>
-      </div>
-      <div class="rule-card">
-        <h3>🏠 Property Care</h3>
-        <ul>
-          <li>Septic: toilet paper only</li>
-          <li>Doors auto-lock</li>
-          <li>Some areas restricted / locked</li>
-          <li>Outdoor cameras only (none inside)</li>
-        </ul>
-      </div>
+      <div class="rule-card"><h3>⏰ Check-In &amp; Out</h3><ul><li>Check-in at 3:00 PM via keypad</li><li>Lake access on check-in day from 12:00 noon</li><li>Check-out strictly 11:00 AM</li><li>Late checkout = additional night</li></ul></div>
+      <div class="rule-card"><h3>👥 Occupancy</h3><ul><li>Maximum 8 guests</li><li>No parties or events</li><li>Only agreed-upon guests permitted</li><li>Extra guests: $100/person/night</li></ul></div>
+      <div class="rule-card"><h3>🐕 Pets</h3><ul><li>Up to 2 dogs, under 50 lbs</li><li>$250 refundable pet deposit</li><li>Dogs must be leashed outdoors</li><li>Wildlife area: coyotes, bears, eagles can be hazardous to pets</li></ul></div>
+      <div class="rule-card"><h3>🌊 On the Water</h3><ul><li>Life jackets required (CT law)</li><li>Water shoes recommended</li><li>No nude swimming</li><li>Owners motorized watercraft access prohibited</li></ul></div>
+      <div class="rule-card"><h3>🚭 Smoking</h3><ul><li>No smoking or vaping indoors</li><li>Proper disposal required</li><li>Guests responsible for damage</li></ul></div>
+      <div class="rule-card"><h3>🏠 Property Care</h3><ul><li>Septic: toilet paper only</li><li>Doors auto-lock</li><li>Some areas restricted / locked</li><li>Outdoor cameras only (none inside)</li></ul></div>
     </div>
   </div>
 </section>
@@ -758,34 +666,13 @@
     <div class="section-label">FAQ</div>
     <h2 class="section-title">Common Questions</h2>
     <div class="faq-wrap">
-      <div class="faq-item">
-        <button class="faq-btn" onclick="toggleFaq(this)">What makes CASAMIRA a wellness retreat? <span class="faq-icon">+</span></button>
-        <div class="faq-body">CASAMIRA is intentionally designed around rest and restoration. Bashan Lake's clean water, forest air, wildlife, and natural surroundings create conditions proven to reduce stress and restore mental clarity. We encourage guests to slow down, unplug, and spend time outdoors — whether that's a quiet morning kayak, reading on the dock, or watching eagles at dusk.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-btn" onclick="toggleFaq(this)">Is the lake safe for children? <span class="faq-icon">+</span></button>
-        <div class="faq-body">Yes. Bashan Lake is one of Connecticut's cleanest lakes with a sandy, shallow entry (first 15 ft) that's ideal for kids. The sandbar area is perfect for little ones. Life jackets are required by CT state law and provided for all ages. Water shoes are recommended due to natural lake bottom.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-btn" onclick="toggleFaq(this)">Can we bring our boat? <span class="faq-icon">+</span></button>
-        <div class="faq-body">Power boating is allowed on Bashan Lake — there's a public launch at the other end. Note: guests do not have access to any motorized watercraft on the property. All non-motorized water toys (kayaks, paddleboards, canoe, floats) are included in your stay.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-btn" onclick="toggleFaq(this)">Are dogs welcome? <span class="faq-icon">+</span></button>
-        <div class="faq-body">Absolutely. Up to 2 well-behaved dogs under 60 lbs are welcome with a $250 pet deposit. Dogs must be leashed outdoors — we're in active wildlife territory with eagles, hawks, coyotes, and bears. Dogs cannot be left alone on the property at any time.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-btn" onclick="toggleFaq(this)">Is there WiFi? Can we truly disconnect? <span class="faq-icon">+</span></button>
-        <div class="faq-body">Fiber WiFi is available (login on fridge) for those who need to stay connected. But we'll tell you from experience: the lake has a way of making you forget your phone. You have the choice — and many guests tell us it's the best digital detox they've had.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-btn" onclick="toggleFaq(this)">What are check-in / check-out times? <span class="faq-icon">+</span></button>
-        <div class="faq-body">Check-in is at 3:00 PM via keypad (code provided before arrival). You're welcome to access the lake from 12 noon, but luggage stays in your car until 3 PM. Check-out is strictly 11:00 AM — the lock code expires automatically. Late checkout results in an additional night charge.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-btn" onclick="toggleFaq(this)">Are the owners on-site? <span class="faq-icon">+</span></button>
-        <div class="faq-body">Yes — Lawrence and Melissa live in a separate structure on the property and are available by cell phone between 9 AM and 7 PM. They're warm, responsive hosts who want your stay to be exceptional. There are outdoor security cameras on the property; no cameras inside the home.</div>
-      </div>
+      <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(this)">What makes CASAMIRA a wellness retreat? <span class="faq-icon">+</span></button><div class="faq-body">CASAMIRA is intentionally designed around rest and restoration. Bashan Lake's clean water, forest air, wildlife, and natural surroundings create conditions proven to reduce stress and restore mental clarity. We encourage guests to slow down, unplug, and spend time outdoors — whether that's a quiet morning kayak, reading on the dock, or watching eagles at dusk.</div></div>
+      <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(this)">Is the lake safe for children? <span class="faq-icon">+</span></button><div class="faq-body">Yes. Bashan Lake is one of Connecticut's cleanest lakes with a sandy, shallow entry (first 15 ft) that's ideal for kids. The sandbar area is perfect for little ones. Life jackets are required by CT state law and provided for all ages. Water shoes are recommended due to natural lake bottom.</div></div>
+      <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(this)">Can we bring our boat? <span class="faq-icon">+</span></button><div class="faq-body">Power boating is allowed on Bashan Lake — there's a public launch at the other end. Note: guests do not have access to any motorized watercraft on the property. All non-motorized water toys (kayaks, paddleboards, canoe, floats) are included in your stay.</div></div>
+      <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(this)">Are dogs welcome? <span class="faq-icon">+</span></button><div class="faq-body">Absolutely. Up to 2 well-behaved dogs under 60 lbs are welcome with a $250 pet deposit. Dogs must be leashed outdoors — we're in active wildlife territory with eagles, hawks, coyotes, and bears. Dogs cannot be left alone on the property at any time.</div></div>
+      <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(this)">Is there WiFi? Can we truly disconnect? <span class="faq-icon">+</span></button><div class="faq-body">Fiber WiFi is available (login on fridge) for those who need to stay connected. But we'll tell you from experience: the lake has a way of making you forget your phone. You have the choice — and many guests tell us it's the best digital detox they've had.</div></div>
+      <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(this)">What are check-in / check-out times? <span class="faq-icon">+</span></button><div class="faq-body">Check-in is at 3:00 PM via keypad (code provided before arrival). You're welcome to access the lake from 12 noon, but luggage stays in your car until 3 PM. Check-out is strictly 11:00 AM — the lock code expires automatically. Late checkout results in an additional night charge.</div></div>
+      <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(this)">Are the owners on-site? <span class="faq-icon">+</span></button><div class="faq-body">Yes — the owners live in a separate structure on the property and are available by cell phone between 9 AM and 7 PM. They're warm, responsive hosts who want your stay to be exceptional. There are outdoor security cameras on the property; no cameras inside the home.</div></div>
     </div>
   </div>
 </section>
@@ -797,7 +684,7 @@
     <h2 class="section-title">Start Your <em>Journey</em></h2>
     <div class="contact-layout">
       <div class="contact-info">
-        <h3>Lawrence &amp; Melissa</h3>
+        <h3>The Owners</h3>
         <p style="color:rgba(255,255,255,0.6);font-size:0.9rem;line-height:1.8;font-weight:300;margin-bottom:1.5rem;">We're local owners who care deeply about this place and about the experience of every guest who stays here. We'd love to connect, answer questions, and help you plan the perfect lake escape.</p>
         <div class="c-detail"><span class="ico">📍</span><span>Bashan Lake · East Haddam, Connecticut</span></div>
         <div class="c-detail"><span class="ico">🌐</span><span>lakevacationsrental.com</span></div>
@@ -807,18 +694,9 @@
       </div>
       <div class="contact-form">
         <form onsubmit="handleContact(event)">
-          <div class="fg" style="margin-bottom:1rem">
-            <label>Name</label>
-            <input type="text" placeholder="Your name">
-          </div>
-          <div class="fg" style="margin-bottom:1rem">
-            <label>Email</label>
-            <input type="email" placeholder="your@email.com">
-          </div>
-          <div class="fg" style="margin-bottom:1.5rem">
-            <label>Message</label>
-            <textarea rows="4" placeholder="Ask us anything about the property, availability, or the area…"></textarea>
-          </div>
+          <div class="fg"><label>Name</label><input type="text" placeholder="Your name" required></div>
+          <div class="fg"><label>Email</label><input type="email" placeholder="your@email.com" required></div>
+          <div class="fg"><label>Message</label><textarea rows="4" placeholder="Ask us anything about the property, availability, or the area…"></textarea></div>
           <button type="submit" class="btn-book" style="background:var(--gold-lt);color:var(--navy)">Send Message →</button>
         </form>
       </div>
@@ -828,10 +706,10 @@
 
 <!-- FOOTER -->
 <footer>
-  <img src="CASAMIRA_TRANSPARENT_LOGO.png" alt="CASAMIRA" onerror="this.style.display='none'">
+  <img src="CASAMIRA_TRANSPARENT_LOGO.png" alt="CASAMIRA">
   <p>
     <strong style="color:rgba(232,238,238,0.6);">CASAMIRA</strong> — Where Nature Feels Like Home<br>
-    Bashan Lake · East Haddam, Connecticut · <a href="http://lakevacationsrental.com">lakevacationsrental.com</a><br><br>
+    Bashan Lake · East Haddam, Connecticut · <a href="https://lakevacationsrental.com">lakevacationsrental.com</a><br><br>
     © 2026 CASAMIRA / Lake Vacations Rental · All rights reserved
   </p>
 </footer>
@@ -854,15 +732,6 @@
     if (!isOpen) item.classList.add('open');
   }
 
-  function handleBook(e) {
-    e.preventDefault();
-    const btn = e.target.querySelector('button');
-    btn.textContent = '✓ Inquiry sent — we\'ll reply within 24 hours';
-    btn.style.background = '#3a7a5a';
-    btn.style.color = 'white';
-    btn.disabled = true;
-  }
-
   function handleContact(e) {
     e.preventDefault();
     const btn = e.target.querySelector('button');
@@ -880,11 +749,8 @@
       if (!link) return;
       if (sec.offsetTop <= y && sec.offsetTop + sec.offsetHeight > y) {
         link.style.color = 'var(--gold)';
-      } else {
-        link.style.color = '';
-      }
+      } else { link.style.color = ''; }
     });
   });
 </script>
-
 </body></html>
