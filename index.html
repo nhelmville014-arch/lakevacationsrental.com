@@ -692,10 +692,13 @@
         <div class="c-detail"><span class="ico">🔑</span><span>Returning guests receive first right of refusal for future summers</span></div>
       </div>
       <div class="contact-form">
-        <form onsubmit="handleContact(event)">
-          <div class="fg"><label>Name</label><input type="text" placeholder="Your name" required></div>
-          <div class="fg"><label>Email</label><input type="email" placeholder="your@email.com" required></div>
-          <div class="fg"><label>Message</label><textarea rows="4" placeholder="Ask us anything about the property, availability, or the area…"></textarea></div>
+        <form action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="f50d24fc-83fd-4d25-85c4-984cb33ca796">
+          <input type="hidden" name="subject" value="New Message from CASAMIRA Website">
+          <input type="hidden" name="from_name" value="CASAMIRA Website">
+          <div class="fg"><label>Name</label><input type="text" name="name" placeholder="Your name" required></div>
+          <div class="fg"><label>Email</label><input type="email" name="email" placeholder="your@email.com" required></div>
+          <div class="fg"><label>Message</label><textarea name="message" rows="4" placeholder="Ask us anything about the property, availability, or the area…" required></textarea></div>
           <button type="submit" class="btn-book" style="background:var(--gold-lt);color:var(--navy)">Send Message →</button>
         </form>
       </div>
